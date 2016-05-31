@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace Singleton
 {
     class User
     {
+        CultureInfo provider = CultureInfo.InvariantCulture;
+
        public string LastName;
        public string FirstName;
-       public string Birthdate;
-       public string TimeAdded;
+       public DateTime Birthdate;
+       public DateTime TimeAdded;
        public string City;
        public string Address;
        public string PhoneNumber;
@@ -19,35 +22,52 @@ namespace Singleton
 
        public void InputUser()
        {
-           Console.WriteLine("     Please input user data ");
-           Console.Write("input lastname: ");
-           Console.ReadLine();
+                Console.WriteLine("     Please input user data ");
+               Console.Write("input lastname: ");
+              this.LastName = Console.ReadLine();
 
-           Console.Write("input firstname: ");
-           Console.ReadLine();
+               Console.Write("input firstname: ");
+               this.FirstName =  Console.ReadLine();
 
-           Console.Write("input Birthdate: ");
-           Console.ReadLine();
+          
+               do
+             {
+                   Console.Write("input Birthdate (dd.mm.yyyy): ");
+                   if (!DateTime.TryParseExact(Console.ReadLine(), "dd.MM.yyyy", provider, System.Globalization.DateTimeStyles.None, out this.Birthdate))
+                       Console.WriteLine("Wrong date format, Please try again, be more attentive!");
+                   else
+                       break;
 
-           Console.Write("input TimeAdded: ");
-           Console.ReadLine();
+               } while (true);
+           
+           
+               do
+               {
+                   Console.Write("input TimeAdded (dd.mm.yyyy): ");
+                   if (!DateTime.TryParseExact(Console.ReadLine(), "dd.MM.yyyy", provider, System.Globalization.DateTimeStyles.None, out this.TimeAdded))
+                       Console.WriteLine("Wrong date format, Please try again, be more attentive!");
+                   else
+                       break;
 
-           Console.Write("input City: ");
-           Console.ReadLine();
+               } while (true);
+         
 
-           Console.Write("input Address: ");
-           Console.ReadLine();
+               Console.Write("input City: ");
+               this.City =  Console.ReadLine();
 
-           Console.Write("input PhoneNumber: ");
-           Console.ReadLine();
+               Console.Write("input Address: ");
+               this.Address =  Console.ReadLine();
+    
+                Console.Write("input PhoneNumber: ");
+                this.PhoneNumber = Console.ReadLine();
 
-           Console.Write("input Gender: ");
-           Console.ReadLine();
+                Console.Write("input Gender: ");
+                this.Gender = Console.ReadLine();
 
-           Console.Write("input Email: ");
-           Console.ReadLine();
+                Console.Write("input Email: ");
+               this.Email = Console.ReadLine();
 
-           Console.WriteLine();
+               Console.WriteLine();
        }
     }
 }
